@@ -1,20 +1,124 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  Image,
+  FlatList,
+  Linking,
+} from "react-native";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+
+import ButtonText from "./src/components/ButtonText";
+import Section from "./src/components/Section";
+import ProjectCard from "./src/components/ProjectCard";
+
+import data from "./src/data";
 
 export default function App() {
+  const handleSocial = (social: string) => Linking.openURL(social);
+
+  const handleContactMe = () => Linking.openURL(`mailto:${data.email}`);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>
+        <ScrollView showsHorizontalScrollIndicator={false}>
+          <Image
+            style={styles.banner}
+            source={{
+              uri: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/pinterest/0.jpeg",
+            }}
+          />
+
+          <View style={{ gap: 20 }}>
+            <View style={styles.profileContainer}>
+              <Image
+                style={styles.avatar}
+                source={{ uri: "https://i.pravatar.cc/300" }}
+              />
+              <Text style={styles.name}>{data.name}</Text>
+              <Text style={styles.designation}>{data.designation}</Text>
+            </View>
+
+            <View style={styles.socialsContainer}>
+              <FontAwesome6
+                name="github"
+                size={24}
+                color="black"
+                onPress={() => handleSocial(data.social.github)}
+              />
+              <FontAwesome6
+                name="linkedin"
+                size={24}
+                color="black"
+                onPress={() => handleSocial(data.social.linkedin)}
+              />
+              <FontAwesome6
+                name="link"
+                size={24}
+                color="black"
+                onPress={() => handleSocial(data.social.website)}
+              />
+            </View>
+
+            <Text style={styles.bio}>{data.bio}</Text>
+
+            <ButtonText text="Contact Me" onPress={handleContactMe} />
+
+            <Section title="My Projects">
+              <FlatList
+                contentContainerStyle={styles.projectsContainer}
+                data={data.projects}
+                renderItem={({ item }) => <ProjectCard {...item} />}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+              />
+            </Section>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  banner: {
+    width: "100%",
+    aspectRatio: 16 / 9,
+  },
+  profileContainer: {
+    alignItems: "center",
+  },
+  avatar: {
+    width: 140,
+    height: 140,
+    borderRadius: 70,
+    borderWidth: 4,
+    borderColor: "white",
+    marginTop: -70,
+  },
+  name: {
+    fontSize: 28,
+    fontWeight: "bold",
+  },
+  designation: {
+    color: "grey",
+  },
+  socialsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 24,
+  },
+  bio: {
+    fontSize: 16,
+    lineHeight: 20,
+    textAlign: "center",
+    paddingHorizontal: 12,
+  },
+  projectsContainer: {
+    gap: 12,
+    paddingHorizontal: 12,
   },
 });

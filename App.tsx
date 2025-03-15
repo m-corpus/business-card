@@ -11,11 +11,11 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
-import ButtonText from "./src/components/ButtonText";
-import Section from "./src/components/Section";
-import ProjectCard from "./src/components/ProjectCard";
+import ButtonText from "@/components/ButtonText";
+import Section from "@/components/Section";
+import ProjectCard from "@/components/ProjectCard";
 
-import data from "./src/data";
+import data from "@/data";
 
 export default function App() {
   const handleSocial = (social: string) => Linking.openURL(social);

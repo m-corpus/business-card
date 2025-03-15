@@ -11,23 +11,23 @@ export default {
   projects: [
     {
       name: "Tomato | Food Delivery App",
-      thumbnail: require("../assets/images/project_1.png"),
+      thumbnail: require("@assets/images/project_1.png"),
     },
     {
       name: "Streamify | Movie App",
-      thumbnail: require("../assets/images/project_2.png"),
+      thumbnail: require("@assets/images/project_2.png"),
     },
     {
       name: "WhatsApp | Messaging App",
-      thumbnail: require("../assets/images/project_3.png"),
+      thumbnail: require("@assets/images/project_3.png"),
     },
     {
       name: "LinkUp | Social Media App",
-      thumbnail: require("../assets/images/project_4.png"),
+      thumbnail: require("@assets/images/project_4.png"),
     },
     {
       name: "Noter | Note Taking App",
-      thumbnail: require("../assets/images/project_5.png"),
+      thumbnail: require("@assets/images/project_5.png"),
     },
   ],
 };

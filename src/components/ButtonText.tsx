@@ -18,6 +18,5 @@ const styles = StyleSheet.create({
     color: "dodgerblue",
     fontSize: 16,
     fontWeight: "500",
-    textAlign: "center",
   },
 });

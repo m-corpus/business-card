@@ -7,8 +7,9 @@ import {
   FlatList,
   Linking,
 } from "react-native";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 import ButtonText from "./src/components/ButtonText";
 import Section from "./src/components/Section";
@@ -24,7 +25,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>
-        <ScrollView showsHorizontalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <Image
             style={styles.banner}
             source={{
@@ -32,7 +33,7 @@ export default function App() {
             }}
           />
 
-          <View style={{ gap: 20 }}>
+          <View style={styles.body}>
             <View style={styles.profileContainer}>
               <Image
                 style={styles.avatar}
@@ -66,18 +67,20 @@ export default function App() {
             <Text style={styles.bio}>{data.bio}</Text>
 
             <ButtonText text="Contact Me" onPress={handleContactMe} />
-
-            <Section title="My Projects">
-              <FlatList
-                contentContainerStyle={styles.projectsContainer}
-                data={data.projects}
-                renderItem={({ item }) => <ProjectCard {...item} />}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-              />
-            </Section>
           </View>
+
+          <Section title="My Projects">
+            <FlatList
+              contentContainerStyle={styles.projectCardsContainer}
+              data={data.projects}
+              renderItem={({ item }) => <ProjectCard {...item} />}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+          </Section>
         </ScrollView>
+
+        <StatusBar style="light" />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -88,6 +91,13 @@ const styles = StyleSheet.create({
     width: "100%",
     aspectRatio: 16 / 9,
   },
+  body: {
+    marginTop: -70,
+    marginBottom: 20,
+    alignItems: "center",
+    gap: 20,
+    paddingHorizontal: 12,
+  },
   profileContainer: {
     alignItems: "center",
   },
@@ -97,7 +107,6 @@ const styles = StyleSheet.create({
     borderRadius: 70,
     borderWidth: 4,
     borderColor: "white",
-    marginTop: -70,
   },
   name: {
     fontSize: 28,
@@ -108,16 +117,14 @@ const styles = StyleSheet.create({
   },
   socialsContainer: {
     flexDirection: "row",
-    justifyContent: "center",
     gap: 24,
   },
   bio: {
     fontSize: 16,
     lineHeight: 20,
     textAlign: "center",
-    paddingHorizontal: 12,
   },
-  projectsContainer: {
+  projectCardsContainer: {
     gap: 12,
     paddingHorizontal: 12,
   },
